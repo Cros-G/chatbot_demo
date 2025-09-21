@@ -40,7 +40,7 @@ export const errorHandler = (
   error: AppError,
   req: Request,
   res: Response,
-  next: NextFunction
+  _next: NextFunction
 ) => {
   console.error('Error:', {
     message: error.message,

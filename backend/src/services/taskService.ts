@@ -177,14 +177,19 @@ class TaskService {
       });
     }
     
-    return {
+    const task: Task = {
       id: taskRow.id,
       name: taskRow.name,
-      description: taskRow.description,
       phases,
       created_at: new Date(taskRow.created_at),
       updated_at: new Date(taskRow.updated_at)
     };
+    
+    if (taskRow.description) {
+      task.description = taskRow.description;
+    }
+    
+    return task;
   }
 }
 

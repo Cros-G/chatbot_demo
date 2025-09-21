@@ -1,5 +1,4 @@
 import sqlite3 from 'sqlite3';
-import { promisify } from 'util';
 import path from 'path';
 
 const DB_PATH = path.join(__dirname, '../../database/chatbot.db');

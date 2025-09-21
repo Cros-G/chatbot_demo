@@ -4,7 +4,7 @@ import { TaskCreateRequest } from '../types';
 import { ValidationError } from '../middleware/errorHandler';
 
 class TaskController {
-  async getAllTasks(req: Request, res: Response, next: NextFunction) {
+  async getAllTasks(_req: Request, res: Response, next: NextFunction) {
     try {
       const tasks = await taskService.getAllTasks();
       res.json({ data: tasks });
@@ -16,6 +16,9 @@ class TaskController {
   async getTaskById(req: Request, res: Response, next: NextFunction) {
     try {
       const { id } = req.params;
+      if (!id) {
+        throw new ValidationError('任务ID不能为空');
+      }
       const task = await taskService.getTaskById(id);
       res.json({ data: task });
     } catch (error) {
@@ -45,6 +48,9 @@ class TaskController {
   async updateTask(req: Request, res: Response, next: NextFunction) {
     try {
       const { id } = req.params;
+      if (!id) {
+        throw new ValidationError('任务ID不能为空');
+      }
       const taskData: TaskCreateRequest = req.body;
       
       const task = await taskService.updateTask(id, taskData);
@@ -60,6 +66,9 @@ class TaskController {
   async deleteTask(req: Request, res: Response, next: NextFunction) {
     try {
       const { id } = req.params;
+      if (!id) {
+        throw new ValidationError('任务ID不能为空');
+      }
       await taskService.deleteTask(id);
       res.json({ message: '任务删除成功' });
     } catch (error) {
